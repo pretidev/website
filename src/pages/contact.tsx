@@ -1,16 +1,16 @@
 import React from "react"
 import styled, { createGlobalStyle, css } from "styled-components"
+import { Link } from "gatsby"
 
 import { PropsWithTheme } from "../types"
 
 import { Layout } from "../components/Layout"
 import { Seo } from "../components/Seo"
-
-import LogoSvg from "../assets/svg/logo.inline.svg"
 import { Container } from "../styles/Container"
 import { Button } from "../components/Button"
 import { Flex } from "../styles/Flex"
-import { Link } from "gatsby"
+
+import LogoSvg from "../assets/svg/logo.inline.svg"
 
 const GlobalStyles = createGlobalStyle`
   body {

@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react"
+import React, { useState, useCallback, useEffect } from "react"
 import styled, { createGlobalStyle, css } from "styled-components"
 import { Icon } from "@iconify/react"
 import linkedinIcon from "@iconify/icons-brandico/linkedin"
@@ -138,13 +138,46 @@ const Phone = styled(PhoneSvg)`
   }
 `
 
+interface LoadingScreenProps {
+  hide?: boolean
+}
+
+const LoadingScreen = styled.div<PropsWithTheme<LoadingScreenProps>>`
+  opacity: 1;
+  z-index: 10;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: ${({ theme }) => theme.colors.home.bg};
+  transition: opacity 0.3s ease;
+
+  ${({ hide }) =>
+    hide &&
+    css`
+      opacity: 0;
+    `}
+`
+
 const IndexPage = () => {
   const [hover, setHover] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
   const { isDeviceMin, isDeviceMax } = useBreakPoints()
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false)
+    }, 200)
+  }, [])
 
   const onButtonHover = useCallback(() => {
     return setHover(!hover)
   }, [hover, setHover])
+
+  const isDeviceMinMd = isDeviceMin("md")
+  const isDeviceMaxSm = isDeviceMax("sm")
+  const isDeviceMaxMd = isDeviceMax("md")
 
   return (
     <Layout>
@@ -154,11 +187,14 @@ const IndexPage = () => {
         description="Pretidev, spécialiste du web design, et du développement web vous accompagne dans vos projets sur-mesures de qualité : développement, graphisme, conseil, formation"
       />
 
-      {isDeviceMin("md") ? <Wave accelerate={hover} /> : <MobileWave />}
+      <LoadingScreen hide={!isLoading} />
 
-      <Container>
+      {isDeviceMinMd && <Wave accelerate={hover} />}
+      {isDeviceMaxSm && <MobileWave />}
+
+      <Container className="container">
         <Flex
-          style={{ height: isDeviceMin("md") ? "100vh" : "auto" }}
+          style={{ height: isDeviceMinMd ? "100vh" : "auto" }}
           justifyContent={"space-between"}
           direction="column"
         >
@@ -169,10 +205,8 @@ const IndexPage = () => {
           <Flex
             style={{ minWidth: "100%" }}
             alignItems="center"
-            justifyContent={
-              isDeviceMax("sm") ? "space-between" : "space-around"
-            }
-            direction={isDeviceMax("sm") ? "column" : "row"}
+            justifyContent={isDeviceMaxSm ? "space-between" : "space-around"}
+            direction={isDeviceMaxSm ? "column" : "row"}
           >
             <Prestations>
               <Prestation>Webdesign.</Prestation>
@@ -181,13 +215,13 @@ const IndexPage = () => {
             </Prestations>
 
             <aside>
-              <Phone style={{ marginTop: isDeviceMax("md") ? 40 : 0 }} />
+              <Phone style={{ marginTop: isDeviceMaxMd ? 40 : 0 }} />
             </aside>
           </Flex>
 
           <Flex
             justifyContent="center"
-            style={{ width: "100%", marginTop: isDeviceMax("md") ? 40 : 0 }}
+            style={{ width: "100%", marginTop: isDeviceMaxMd ? 40 : 0 }}
           >
             <Button
               tag="link"
@@ -195,7 +229,7 @@ const IndexPage = () => {
               onMouseEnter={onButtonHover}
               onMouseLeave={onButtonHover}
             >
-              {isDeviceMax("md")
+              {isDeviceMaxMd
                 ? "Nous contacter"
                 : "Question ? Devis ? → par ici"}
             </Button>
@@ -205,7 +239,7 @@ const IndexPage = () => {
             style={{
               height: 100,
               width: "100%",
-              marginTop: isDeviceMax("md") ? 30 : 0,
+              marginTop: isDeviceMaxMd ? 30 : 0,
             }}
             alignItems="center"
             justifyContent="space-between"
@@ -217,7 +251,7 @@ const IndexPage = () => {
                   icon={linkedinIcon}
                   style={{
                     color: "#00222d",
-                    fontSize: isDeviceMax("md") ? "25px" : "30px",
+                    fontSize: isDeviceMaxMd ? "25px" : "30px",
                   }}
                 />
               </a>
@@ -226,7 +260,7 @@ const IndexPage = () => {
                   icon={facebookIcon}
                   style={{
                     color: "#00222d",
-                    fontSize: isDeviceMax("md") ? "25px" : "30px",
+                    fontSize: isDeviceMaxMd ? "25px" : "30px",
                   }}
                 />
               </a>
