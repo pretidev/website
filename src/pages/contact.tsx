@@ -84,6 +84,7 @@ const Contact = () => {
           netlify-honeypot="bot-field"
           data-netlify="true"
           name="contact"
+          action="/success"
         >
           <input type="hidden" name="bot-field" />
           <input type="hidden" name="form-name" value="contact" />
@@ -96,13 +97,13 @@ const Contact = () => {
             </Flex>
 
             <Label>Nom complet</Label>
-            <Input type="text" name="fullname" />
+            <Input type="text" name="fullname" required />
 
             <Label>Email</Label>
-            <Input type="text" name="email" />
+            <Input type="email" name="email" required />
 
             <Label>Message</Label>
-            <Textarea name="message" />
+            <Textarea name="message" required />
 
             <Flex
               justifyContent="center"

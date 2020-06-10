@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from "react"
-import styled, { createGlobalStyle, css } from "styled-components"
+import styled, { createGlobalStyle, css, keyframes } from "styled-components"
 import { Icon } from "@iconify/react"
 import linkedinIcon from "@iconify/icons-brandico/linkedin"
 import facebookIcon from "@iconify/icons-brandico/facebook"
@@ -138,11 +138,16 @@ const Phone = styled(PhoneSvg)`
   }
 `
 
-interface LoadingScreenProps {
-  hide?: boolean
-}
+const fadeOut = keyframes`
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+`
 
-const LoadingScreen = styled.div<PropsWithTheme<LoadingScreenProps>>`
+const LoadingScreen = styled.div`
   opacity: 1;
   z-index: 10;
   position: fixed;
@@ -151,24 +156,23 @@ const LoadingScreen = styled.div<PropsWithTheme<LoadingScreenProps>>`
   left: 0;
   right: 0;
   background: ${({ theme }) => theme.colors.home.bg};
-  transition: opacity 0.3s ease;
-
-  ${({ hide }) =>
-    hide &&
-    css`
-      opacity: 0;
-    `}
+  animation: 0.4s ${fadeOut} ease forwards;
+  animation-delay: 0.2s;
 `
 
 const IndexPage = () => {
   const [hover, setHover] = useState(false)
-  const [isLoading, setIsLoading] = useState(true)
+  const [loadingEnd, setLoadingEnd] = useState(false)
   const { isDeviceMin, isDeviceMax } = useBreakPoints()
 
   useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 200)
+    const timeout = setTimeout(() => {
+      setLoadingEnd(true)
+    }, 700)
+
+    return () => {
+      clearTimeout(timeout)
+    }
   }, [])
 
   const onButtonHover = useCallback(() => {
@@ -187,7 +191,7 @@ const IndexPage = () => {
         description="Pretidev, spécialiste du web design, et du développement web vous accompagne dans vos projets sur-mesures de qualité : développement, graphisme, conseil, formation"
       />
 
-      <LoadingScreen hide={!isLoading} />
+      {!loadingEnd && <LoadingScreen />}
 
       {isDeviceMinMd && <Wave accelerate={hover} />}
       {isDeviceMaxSm && <MobileWave />}
