@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react"
-import throttle from "lodash.throttle"
 
 const isClient = typeof window === "object"
 

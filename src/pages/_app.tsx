@@ -1,5 +1,5 @@
 import React, { useState, FC, ReactNode } from "react"
-import App, { AppContext } from "next/app"
+import App, { AppContext, AppProps } from "next/app"
 import { ThemeProvider, createGlobalStyle } from "styled-components"
 
 import { PropsWithTheme, DeviceType } from "../types"
@@ -52,7 +52,11 @@ export const Layout: FC<LayoutProps> = ({ children, userAgent }) => {
   )
 }
 
-export default class AppComponent extends App {
+interface AppComponentProps extends AppProps {
+  userAgent: string
+}
+
+export default class AppComponent extends App<AppComponentProps> {
   static getInitialProps({ ctx }: AppContext): any {
     return {
       props: {
