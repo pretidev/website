@@ -1,16 +1,15 @@
-import React from "react"
+import React, { FC } from "react"
 import styled, { createGlobalStyle, css } from "styled-components"
-import { Link } from "gatsby"
+import Link from "next/link"
 
 import { PropsWithTheme } from "../types"
 
-import { Layout } from "../components/Layout"
 import { Seo } from "../components/Seo"
 import { Container } from "../styles/Container"
 import { Button } from "../components/Button"
 import { Flex } from "../styles/Flex"
 
-import LogoSvg from "../assets/svg/logo.inline.svg"
+import LogoSvg from "../assets/svg/logo.svg"
 
 const GlobalStyles = createGlobalStyle`
   body {
@@ -19,7 +18,6 @@ const GlobalStyles = createGlobalStyle`
 `
 
 const Logo = styled(LogoSvg)`
-  width: 180px;
   margin-top: 40px;
   margin-bottom: 60px;
 `
@@ -69,9 +67,9 @@ const Legal = styled.div`
   font-size: 14px;
 `
 
-const Contact = () => {
+const Contact: FC = () => {
   return (
-    <Layout>
+    <>
       <GlobalStyles />
       <Seo
         title="Pretidev - votre partenaire de confiance pour des projets de qualité"
@@ -86,15 +84,16 @@ const Contact = () => {
           name="contact"
           action="/success"
         >
-          <input type="hidden" name="bot-field" />
-          <input type="hidden" name="form-name" value="contact" />
-
           <Flex direction="column" justifyContent="center" flex="1">
             <Flex justifyContent="center" style={{ width: "100%" }}>
-              <Link to="/">
-                <Logo />
+              <Link href="/">
+                <a>
+                  <Logo width="180" />
+                </a>
               </Link>
             </Flex>
+            <input type="hidden" name="bot-field" />
+            <input type="hidden" name="form-name" value="contact" />
 
             <Label>Nom complet</Label>
             <Input type="text" name="fullname" required />
@@ -119,7 +118,7 @@ const Contact = () => {
           </Flex>
         </form>
       </Container>
-    </Layout>
+    </>
   )
 }
 

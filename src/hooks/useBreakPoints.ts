@@ -1,15 +1,22 @@
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect, useContext } from "react"
 import { useWindowSizes } from "./useWindowSizes"
 import { breakpoints } from "../constants"
+import { DeviceType } from "../types"
+import AppContext from "../contexts/appContext"
 
-export type DeviceType = "xs" | "sm" | "md" | "lg"
+type DeviceCallback = (device: DeviceType) => boolean
+
+export interface UseBreakPointsReturn {
+  isDeviceMin: DeviceCallback
+  isDeviceMax: DeviceCallback
+  device: DeviceType
+}
 
 const getDeviceConfig = (width: number | undefined): DeviceType => {
   if (width === undefined) {
     return "sm"
   }
 
-  console.log("width", width)
   if (width < breakpoints.sm) {
     return "xs"
   } else if (width >= breakpoints.sm && width < breakpoints.md) {
@@ -23,47 +30,14 @@ const getDeviceConfig = (width: number | undefined): DeviceType => {
   return "sm"
 }
 
-export const useBreakPoints = () => {
+export const useBreakPoints = (): DeviceType => {
   const { width } = useWindowSizes()
-  const [deviceType, setDeviceType] = useState<DeviceType>(() =>
-    getDeviceConfig(width)
-  )
-
-  const isDeviceMin = useCallback(
-    (device: DeviceType) => {
-      switch (device) {
-        case "xs":
-          return true
-        case "sm":
-          return deviceType !== "xs"
-        case "md":
-          return deviceType === "md" || deviceType === "lg"
-        case "lg":
-          return deviceType === "lg"
-      }
-    },
-    [deviceType]
-  )
-
-  const isDeviceMax = useCallback(
-    (device: DeviceType) => {
-      switch (device) {
-        case "xs":
-          return deviceType === "xs"
-        case "sm":
-          return deviceType === "xs" || deviceType === "sm"
-        case "md":
-          return deviceType !== "lg"
-        case "lg":
-          return true
-      }
-    },
-    [deviceType]
-  )
+  const { deviceType: initialDeviceType } = useContext(AppContext)
+  const [deviceType, setDeviceType] = useState<DeviceType>(initialDeviceType)
 
   useEffect(() => {
     setDeviceType(getDeviceConfig(width))
   }, [width])
 
-  return { isDeviceMin, isDeviceMax, device: deviceType }
+  return deviceType
 }

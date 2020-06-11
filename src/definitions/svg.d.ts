@@ -3,3 +3,9 @@ declare module "*.svg" {
 
   export default value
 }
+
+declare module "*.svg?file" {
+  const value: any
+
+  export default value
+}

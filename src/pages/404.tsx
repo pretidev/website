@@ -1,15 +1,14 @@
-import React from "react"
-import styled, { createGlobalStyle, css } from "styled-components"
-import { Link } from "gatsby"
+import React, { FC } from "react"
+import styled, { createGlobalStyle } from "styled-components"
+import Link from "next/link"
 
 import { PropsWithTheme } from "../types"
 
-import { Layout } from "../components/Layout"
 import { Seo } from "../components/Seo"
 import { Container } from "../styles/Container"
 import { Flex } from "../styles/Flex"
 
-import Logo from "../assets/svg/logo.inline.svg"
+import Logo from "../assets/svg/logo.svg"
 
 const GlobalStyles = createGlobalStyle`
   body {
@@ -32,9 +31,9 @@ const Title = styled.h1`
   font-weight: 900;
 `
 
-const NotFound = () => {
+const NotFound: FC = () => {
   return (
-    <Layout>
+    <>
       <GlobalStyles />
 
       <Seo
@@ -48,8 +47,10 @@ const NotFound = () => {
             justifyContent="center"
             style={{ width: "100%", marginTop: 60 }}
           >
-            <Link to="/">
-              <Logo />
+            <Link href="/">
+              <a>
+                <Logo />
+              </a>
             </Link>
           </Flex>
 
@@ -66,7 +67,7 @@ const NotFound = () => {
           </Flex>
         </Flex>
       </Container>
-    </Layout>
+    </>
   )
 }
 

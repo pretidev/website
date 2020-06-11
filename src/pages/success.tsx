@@ -1,16 +1,15 @@
-import React from "react"
-import styled, { createGlobalStyle, css } from "styled-components"
-import { Link } from "gatsby"
+import React, { FC } from "react"
+import styled, { createGlobalStyle } from "styled-components"
+import Link from "next/link"
 
 import { PropsWithTheme } from "../types"
 
-import { Layout } from "../components/Layout"
 import { Seo } from "../components/Seo"
 import { Container } from "../styles/Container"
 import { Flex } from "../styles/Flex"
 
-import Logo from "../assets/svg/logo.inline.svg"
-import ThanksSvg from "../assets/svg/thanks.inline.svg"
+import Logo from "../assets/svg/logo.svg"
+import ThanksSvg from "../assets/svg/thanks.svg"
 
 const GlobalStyles = createGlobalStyle`
   body {
@@ -28,9 +27,9 @@ const Title = styled.h1`
   font-weight: 900;
 `
 
-const Success = () => {
+const Success: FC = () => {
   return (
-    <Layout>
+    <>
       <GlobalStyles />
       <Seo
         title="Pretidev - votre partenaire de confiance pour des projets de qualité"
@@ -38,9 +37,14 @@ const Success = () => {
       />
 
       <Container width="600px">
-        <Flex justifyContent="center" style={{ width: "100%", marginTop: 60 }}>
-          <Link to="/">
-            <Logo />
+        <Flex
+          justifyContent="center"
+          style={{ width: "100%", marginTop: 40, marginBottom: 40 }}
+        >
+          <Link href="/">
+            <a>
+              <Logo width={180} />
+            </a>
           </Link>
         </Flex>
 
@@ -55,7 +59,7 @@ const Success = () => {
           <p>Nous vous recontacterons très prochainement !</p>
         </Flex>
       </Container>
-    </Layout>
+    </>
   )
 }
 

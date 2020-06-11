@@ -1,5 +1,4 @@
-import { AppTheme } from "./types"
-import { DeviceType } from "./hooks/useBreakPoints"
+import { AppTheme, DeviceType } from "./types"
 
 export const COLORS = {
   white: "#FFFFFF",
@@ -36,8 +35,8 @@ export const breakpoints = {
 type MediaDeviceType = Exclude<DeviceType, "xs">
 
 export const media = {
-  min: (deviceType: MediaDeviceType) =>
+  min: (deviceType: MediaDeviceType): string =>
     `@media screen and (min-width: ${breakpoints[deviceType]}px)`,
-  max: (deviceType: MediaDeviceType) =>
+  max: (deviceType: MediaDeviceType): string =>
     `@media screen and (max-width: ${breakpoints[deviceType]}px)`,
 }

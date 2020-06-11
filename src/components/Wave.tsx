@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react"
+import React, { useRef, useState, FC } from "react"
 import { useWindowSizes } from "../hooks/useWindowSizes"
 import { useTheme } from "styled-components"
 
@@ -13,12 +13,12 @@ interface WaveProps {
   animate?: boolean
 }
 
-export const Wave = ({
+export const Wave: FC<WaveProps> = ({
   amplitude = 120,
   length = 0.005,
   accelerate = false,
   animate = true,
-}: WaveProps) => {
+}) => {
   const theme = useTheme() as AppTheme
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
 
