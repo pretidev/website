@@ -5,7 +5,7 @@ export type AnimationFrameCallback = (deltaTime: number) => any
 export const useAnimationFrame = (
   callback: AnimationFrameCallback,
   deps?: DependencyList | undefined
-) => {
+): void => {
   const requestRef = useRef<number | undefined>()
   const previousTimeRef = useRef<number | undefined>()
 

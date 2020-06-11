@@ -1,6 +1,5 @@
-import React from "react"
+import React, { FC } from "react"
 import { Helmet } from "react-helmet"
-import { useStaticQuery, graphql } from "gatsby"
 
 interface Meta {
   name: string
@@ -14,27 +13,13 @@ export interface SeoProps {
   meta?: Meta[]
 }
 
-export const Seo = ({
+export const Seo: FC<SeoProps> = ({
   description,
   title,
   lang = "fr",
   meta = [],
-}: SeoProps) => {
-  const { site } = useStaticQuery(
-    graphql`
-      query {
-        site {
-          siteMetadata {
-            title
-            description
-            author
-          }
-        }
-      }
-    `
-  )
-
-  const metaDescription = description || site.siteMetadata.description
+}) => {
+  const metaDescription = description
 
   return (
     <Helmet
@@ -42,7 +27,7 @@ export const Seo = ({
         lang,
       }}
       title={title}
-      titleTemplate={`%s | ${site.siteMetadata.title}`}
+      titleTemplate={`%s | ${title}`}
       meta={[
         {
           name: `description`,
@@ -63,10 +48,6 @@ export const Seo = ({
         {
           name: `twitter:card`,
           content: `summary`,
-        },
-        {
-          name: `twitter:creator`,
-          content: site.siteMetadata.author,
         },
         {
           name: `twitter:title`,

@@ -9,7 +9,7 @@ export const drawWave = (
   amplitude: number,
   animation: number,
   color: string
-) => {
+): void => {
   ctx.fillStyle = color
 
   ctx.beginPath()

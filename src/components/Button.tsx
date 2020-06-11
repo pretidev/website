@@ -1,10 +1,10 @@
-import React, { ReactNode } from "react"
+import React, { ReactNode, FC } from "react"
 import styled, { css } from "styled-components"
+import Link from "next/link"
 
 import { PropsWithTheme } from "../types"
 
 import { media } from "../constants"
-import { Link } from "gatsby"
 
 const style = css`
   font-weight: 700;
@@ -68,15 +68,15 @@ interface LinkButtonProps extends BaseButtonProps {
 
 type ButtonProps = ButtonButtonProps | LinkButtonProps
 
-export const Button = ({
+export const Button: FC<ButtonProps> = ({
   children,
   tag = "button",
   to,
   ...props
-}: ButtonProps) => {
+}) => {
   if (tag === "link") {
     return (
-      <LinkButton to={to} {...props}>
+      <LinkButton href={to} {...props}>
         {children}
       </LinkButton>
     )

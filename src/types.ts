@@ -15,6 +15,8 @@ export interface AppTheme {
   }
 }
 
+export type DeviceType = "xs" | "sm" | "md" | "lg"
+
 export interface Dictionary<T extends any = any> {
   [key: string]: T
 }
