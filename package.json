@@ -45,7 +45,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn types:check && yarn lint && yarn lint:fix && yarn format",
+      "pre-commit": "npm run types:check && npm run lint && npm run format"
     }
   }
 }
