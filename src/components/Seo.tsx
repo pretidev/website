@@ -1,63 +1,71 @@
-import React, { FC } from "react"
-import { Helmet } from "react-helmet"
+import React, { FC, useMemo } from "react"
+import Head from "next/head"
 
-interface Meta {
+interface MetaProperty {
+  property: string
+  content: string
+}
+
+interface MetaName {
   name: string
   content: string
 }
 
+type Meta = MetaName | MetaProperty
+
 export interface SeoProps {
   title: string
   description: string
-  lang?: "fr" | "en"
-  meta?: Meta[]
+  metas?: Meta[]
 }
 
-export const Seo: FC<SeoProps> = ({
-  description,
-  title,
-  lang = "fr",
-  meta = [],
-}) => {
-  const metaDescription = description
+export const Seo: FC<SeoProps> = ({ description, title, metas: meta = [] }) => {
+  const baseMetas: Meta[] = useMemo(
+    () => [
+      {
+        name: `description`,
+        content: description,
+      },
+      {
+        property: `og:title`,
+        content: title,
+      },
+      {
+        property: `og:description`,
+        content: description,
+      },
+      {
+        property: `og:type`,
+        content: `website`,
+      },
+      {
+        name: `twitter:card`,
+        content: `summary`,
+      },
+      {
+        name: `twitter:title`,
+        content: title,
+      },
+      {
+        name: `twitter:description`,
+        content: description,
+      },
+      {
+        name: "viewport",
+        content: "initial-scale=1.0, width=device-width",
+      },
+    ],
+    []
+  )
 
   return (
-    <Helmet
-      htmlAttributes={{
-        lang,
-      }}
-      title={title}
-      titleTemplate={`%s | ${title}`}
-      meta={[
-        {
-          name: `description`,
-          content: metaDescription,
-        },
-        {
-          property: `og:title`,
-          content: title,
-        },
-        {
-          property: `og:description`,
-          content: metaDescription,
-        },
-        {
-          property: `og:type`,
-          content: `website`,
-        },
-        {
-          name: `twitter:card`,
-          content: `summary`,
-        },
-        {
-          name: `twitter:title`,
-          content: title,
-        },
-        {
-          name: `twitter:description`,
-          content: metaDescription,
-        },
-      ].concat(meta)}
-    />
+    <Head>
+      <title>{title}</title>
+      <meta name="description" content={description} />
+
+      {[...baseMetas, ...meta].map((meta, i: number) => (
+        <meta key={i} {...meta} />
+      ))}
+    </Head>
   )
 }

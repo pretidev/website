@@ -9,11 +9,7 @@ import { PropsWithTheme } from "../types"
 import { media } from "../constants"
 import { Seo } from "../components/Seo"
 import { Wave } from "../components/Wave"
-import {
-  useBreakPoints,
-  isDeviceMin,
-  isDeviceMax,
-} from "../hooks/useBreakPoints"
+import { useBreakPoints } from "../hooks/useBreakPoints"
 import { Container } from "../styles/Container"
 import { MobileWave } from "../styles/MobileWave"
 import { Flex } from "../styles/Flex"
@@ -21,6 +17,7 @@ import { Button } from "../components/Button"
 
 import LogoSvg from "../assets/svg/logo.svg"
 import PhoneSvg from "../assets/svg/phone.svg"
+import { isDeviceMin, isDeviceMax } from "../services/responsive"
 
 const GlobalStyles = createGlobalStyle`
   body {
@@ -198,8 +195,8 @@ const IndexPage: FC = () => {
 
       {!loadingEnd && <LoadingScreen />}
 
-      {/* {isDeviceMinMd && <Wave accelerate={hover} />} */}
-      <MobileWave />
+      {isDeviceMinMd && <Wave accelerate={hover} />}
+      {isDeviceMaxMd && <MobileWave />}
 
       <Container>
         <Flex
@@ -208,7 +205,7 @@ const IndexPage: FC = () => {
           direction="column"
         >
           <Flex style={{ height: 140 }} alignItems="center">
-            <Logo />
+            <Logo width={240} />
           </Flex>
 
           <Flex

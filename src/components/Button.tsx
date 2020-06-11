@@ -44,7 +44,7 @@ const style = css`
   }
 `
 
-const LinkButton = styled(Link)`
+const LinkButton = styled.a`
   ${style}
 `
 
@@ -76,9 +76,9 @@ export const Button: FC<ButtonProps> = ({
 }) => {
   if (tag === "link") {
     return (
-      <LinkButton href={to} {...props}>
-        {children}
-      </LinkButton>
+      <Link href={to}>
+        <LinkButton {...props}>{children}</LinkButton>
+      </Link>
     )
   }
 

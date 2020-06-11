@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import { useWindowSizes } from "./useWindowSizes"
 import { breakpoints } from "../constants"
 import { DeviceType } from "../types"
+import AppContext from "../contexts/appContext"
 
 type DeviceCallback = (device: DeviceType) => boolean
 
@@ -29,43 +30,10 @@ const getDeviceConfig = (width: number | undefined): DeviceType => {
   return "sm"
 }
 
-export const isDeviceMin = (
-  expectedDevice: DeviceType,
-  currentDevice: DeviceType
-): boolean => {
-  switch (expectedDevice) {
-    case "xs":
-      return true
-    case "sm":
-      return currentDevice !== "xs"
-    case "md":
-      return currentDevice === "md" || currentDevice === "lg"
-    case "lg":
-      return currentDevice === "lg"
-  }
-}
-
-export const isDeviceMax = (
-  expectedDevice: DeviceType,
-  currentDevice: DeviceType
-): boolean => {
-  switch (expectedDevice) {
-    case "xs":
-      return currentDevice === "xs"
-    case "sm":
-      return currentDevice === "xs" || currentDevice === "sm"
-    case "md":
-      return currentDevice !== "lg"
-    case "lg":
-      return true
-  }
-}
-
 export const useBreakPoints = (): DeviceType => {
   const { width } = useWindowSizes()
-  const [deviceType, setDeviceType] = useState<DeviceType>(() =>
-    getDeviceConfig(width)
-  )
+  const { deviceType: initialDeviceType } = useContext(AppContext)
+  const [deviceType, setDeviceType] = useState<DeviceType>(initialDeviceType)
 
   useEffect(() => {
     setDeviceType(getDeviceConfig(width))

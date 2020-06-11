@@ -1,16 +1,16 @@
 import React, { useState, FC, ReactNode } from "react"
-import App from "next/app"
-import { InferGetServerSidePropsType } from "next"
+import App, { AppContext } from "next/app"
 import { ThemeProvider, createGlobalStyle } from "styled-components"
 
 import { PropsWithTheme, DeviceType } from "../types"
 
 import { defaultTheme } from "../constants"
 
-import AppContext, {
+import Context, {
   initContext,
   AppContextInterface,
 } from "../contexts/appContext"
+import { getSizesFallback } from "../services/responsive"
 
 const GlobalStyle = createGlobalStyle`
   html {
@@ -28,10 +28,13 @@ const GlobalStyle = createGlobalStyle`
 
 interface LayoutProps {
   children: ReactNode
+  userAgent: string
 }
 
-export const Layout: FC<LayoutProps> = ({ children }) => {
-  const [deviceType, setDeviceType] = useState<DeviceType>("sm")
+export const Layout: FC<LayoutProps> = ({ children, userAgent }) => {
+  const [deviceType, setDeviceType] = useState<DeviceType>(
+    getSizesFallback(userAgent)
+  )
 
   const appContext: AppContextInterface = {
     ...initContext,
@@ -41,20 +44,28 @@ export const Layout: FC<LayoutProps> = ({ children }) => {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <AppContext.Provider value={appContext}>
+      <Context.Provider value={appContext}>
         <GlobalStyle />
         {children}
-      </AppContext.Provider>
+      </Context.Provider>
     </ThemeProvider>
   )
 }
 
 export default class AppComponent extends App {
+  static getInitialProps({ ctx }: AppContext): any {
+    return {
+      props: {
+        userAgent: ctx?.req?.headers["user-agent"],
+      },
+    }
+  }
+
   render(): JSX.Element {
-    const { Component, pageProps } = this.props
+    const { Component, pageProps, userAgent } = this.props
 
     return (
-      <Layout>
+      <Layout userAgent={userAgent}>
         <Component {...pageProps} />
       </Layout>
     )

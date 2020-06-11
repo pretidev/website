@@ -48,7 +48,9 @@ const NotFound: FC = () => {
             style={{ width: "100%", marginTop: 60 }}
           >
             <Link href="/">
-              <Logo />
+              <a>
+                <Logo />
+              </a>
             </Link>
           </Flex>
 

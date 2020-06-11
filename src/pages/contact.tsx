@@ -18,7 +18,6 @@ const GlobalStyles = createGlobalStyle`
 `
 
 const Logo = styled(LogoSvg)`
-  width: 180px;
   margin-top: 40px;
   margin-bottom: 60px;
 `
@@ -85,15 +84,16 @@ const Contact: FC = () => {
           name="contact"
           action="/success"
         >
-          <input type="hidden" name="bot-field" />
-          <input type="hidden" name="form-name" value="contact" />
-
           <Flex direction="column" justifyContent="center" flex="1">
             <Flex justifyContent="center" style={{ width: "100%" }}>
               <Link href="/">
-                <Logo />
+                <a>
+                  <Logo width="180" />
+                </a>
               </Link>
             </Flex>
+            <input type="hidden" name="bot-field" />
+            <input type="hidden" name="form-name" value="contact" />
 
             <Label>Nom complet</Label>
             <Input type="text" name="fullname" required />

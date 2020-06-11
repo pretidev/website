@@ -37,9 +37,14 @@ const Success: FC = () => {
       />
 
       <Container width="600px">
-        <Flex justifyContent="center" style={{ width: "100%", marginTop: 60 }}>
+        <Flex
+          justifyContent="center"
+          style={{ width: "100%", marginTop: 40, marginBottom: 40 }}
+        >
           <Link href="/">
-            <Logo />
+            <a>
+              <Logo width={180} />
+            </a>
           </Link>
         </Flex>
 
