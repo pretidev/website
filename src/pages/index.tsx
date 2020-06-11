@@ -196,81 +196,83 @@ const IndexPage = () => {
       {isDeviceMinMd && <Wave accelerate={hover} />}
       {isDeviceMaxSm && <MobileWave />}
 
-      <Container className="container">
-        <Flex
-          style={{ height: isDeviceMinMd ? "100vh" : "auto" }}
-          justifyContent={"space-between"}
-          direction="column"
-        >
-          <Flex style={{ height: 140 }} alignItems="center">
-            <Logo />
-          </Flex>
-
+      <Container>
+        <Container>
           <Flex
-            style={{ minWidth: "100%" }}
-            alignItems="center"
-            justifyContent={isDeviceMaxSm ? "space-between" : "space-around"}
-            direction={isDeviceMaxSm ? "column" : "row"}
+            style={{ height: isDeviceMinMd ? "100vh" : "auto" }}
+            justifyContent={"space-between"}
+            direction="column"
           >
-            <Prestations>
-              <Prestation>Webdesign.</Prestation>
-              <Prestation>Développement.</Prestation>
-              <Prestation>Conseil.</Prestation>
-            </Prestations>
+            <Flex style={{ height: 140 }} alignItems="center">
+              <Logo />
+            </Flex>
 
-            <aside>
-              <Phone style={{ marginTop: isDeviceMaxMd ? 40 : 0 }} />
-            </aside>
-          </Flex>
-
-          <Flex
-            justifyContent="center"
-            style={{ width: "100%", marginTop: isDeviceMaxMd ? 40 : 0 }}
-          >
-            <Button
-              tag="link"
-              to="/contact"
-              onMouseEnter={onButtonHover}
-              onMouseLeave={onButtonHover}
+            <Flex
+              style={{ minWidth: "100%" }}
+              alignItems="center"
+              justifyContent={isDeviceMaxSm ? "space-between" : "space-around"}
+              direction={isDeviceMaxSm ? "column" : "row"}
             >
-              {isDeviceMaxMd
-                ? "Nous contacter"
-                : "Question ? Devis ? → par ici"}
-            </Button>
-          </Flex>
+              <Prestations>
+                <Prestation>Webdesign.</Prestation>
+                <Prestation>Développement.</Prestation>
+                <Prestation>Conseil.</Prestation>
+              </Prestations>
 
-          <Flex
-            style={{
-              height: 100,
-              width: "100%",
-              marginTop: isDeviceMaxMd ? 30 : 0,
-            }}
-            alignItems="center"
-            justifyContent="space-between"
-          >
-            <NotaBene>rien à ajouter</NotaBene>
-            <Social>
-              <a href="https://www.linkedin.com/company/pretidev">
-                <Icon
-                  icon={linkedinIcon}
-                  style={{
-                    color: "#00222d",
-                    fontSize: isDeviceMaxMd ? "25px" : "30px",
-                  }}
-                />
-              </a>
-              <a href="https://www.facebook.com/Pretidev-114605563614101">
-                <Icon
-                  icon={facebookIcon}
-                  style={{
-                    color: "#00222d",
-                    fontSize: isDeviceMaxMd ? "25px" : "30px",
-                  }}
-                />
-              </a>
-            </Social>
+              <aside>
+                <Phone style={{ marginTop: isDeviceMaxMd ? 40 : 0 }} />
+              </aside>
+            </Flex>
+
+            <Flex
+              justifyContent="center"
+              style={{ width: "100%", marginTop: isDeviceMaxMd ? 40 : 0 }}
+            >
+              <Button
+                tag="link"
+                to="/contact"
+                onMouseEnter={onButtonHover}
+                onMouseLeave={onButtonHover}
+              >
+                {isDeviceMaxMd
+                  ? "Nous contacter"
+                  : "Question ? Devis ? → par ici"}
+              </Button>
+            </Flex>
+
+            <Flex
+              style={{
+                height: 100,
+                width: "100%",
+                marginTop: isDeviceMaxMd ? 30 : 0,
+              }}
+              alignItems="center"
+              justifyContent="space-between"
+            >
+              <NotaBene>rien à ajouter</NotaBene>
+              <Social>
+                <a href="https://www.linkedin.com/company/pretidev">
+                  <Icon
+                    icon={linkedinIcon}
+                    style={{
+                      color: "#00222d",
+                      fontSize: isDeviceMaxMd ? "25px" : "30px",
+                    }}
+                  />
+                </a>
+                <a href="https://www.facebook.com/Pretidev-114605563614101">
+                  <Icon
+                    icon={facebookIcon}
+                    style={{
+                      color: "#00222d",
+                      fontSize: isDeviceMaxMd ? "25px" : "30px",
+                    }}
+                  />
+                </a>
+              </Social>
+            </Flex>
           </Flex>
-        </Flex>
+        </Container>
       </Container>
     </Layout>
   )
