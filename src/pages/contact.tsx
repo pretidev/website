@@ -250,8 +250,8 @@ const Contact: FC = () => {
                   </Button>
                 </Flex>
                 <Legal>
-                  Vos informations sont utilisées uniquement afin que nous
-                  puissions vous recontacter. Elle ne sont pas conservées.
+                  Aucune donnée personnelle n’est conservée par notre site via
+                  ce formulaire.
                 </Legal>
               </>
             )}
