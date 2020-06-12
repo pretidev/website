@@ -19,6 +19,10 @@ const style = css`
   outline: none;
   text-decoration: none;
 
+  &:disabled {
+    opacity: 0.7;
+  }
+
   ${({ theme }: PropsWithTheme) => css`
     color: ${theme.colors.common.white};
     background: ${theme.colors.common.primary};
