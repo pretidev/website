@@ -93,6 +93,7 @@ const Legal = styled.div`
   margin-top: 30px;
   font-size: 14px;
   width: 100%;
+  margin-bottom: 20px;
 `
 
 const Form = styled.form`
