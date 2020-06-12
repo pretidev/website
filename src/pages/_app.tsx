@@ -23,6 +23,10 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Roboto', sans-serif;
     color: ${({ theme }: PropsWithTheme) => theme.colors.common.text};
     font-size: 1.6em;
+
+    * {
+      font-family: 'Roboto', sans-serif;
+    }
   }
 `
 

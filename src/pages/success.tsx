@@ -10,6 +10,7 @@ import { Flex } from "../styles/Flex"
 
 import Logo from "../assets/svg/logo.svg"
 import ThanksSvg from "../assets/svg/thanks.svg"
+import { Button } from "../components/Button"
 
 const GlobalStyles = createGlobalStyle`
   body {
@@ -57,6 +58,10 @@ const Success: FC = () => {
           <Thanks />
           <Title>Merci !</Title>
           <p>Nous vous recontacterons très prochainement !</p>
+
+          <Button to="/" tag="link" style={{ marginTop: 20 }}>
+            Retourner à l&apos;accueil
+          </Button>
         </Flex>
       </Container>
     </>
