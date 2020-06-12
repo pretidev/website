@@ -51,8 +51,9 @@ const cssCommonFields = css`
   border: none;
   margin-bottom: 20px;
   border-radius: 8px;
-  border: 2px solid #fff;
-  box-shadow: 0 0 16px rgba(0, 0, 0, 0.04);
+  border: 2px solid transparent;
+  -webkit-appearance: none;
+  box-shadow: 0 0 16px 0 rgba(0, 0, 0, 0.06);
   font-size: 1em;
   box-sizing: border-box;
   outline: none;
@@ -243,10 +244,7 @@ const Contact: FC = () => {
                     </FormError>
                   )}
                 </FormGroup>
-                <Flex
-                  justifyContent="center"
-                  style={{ width: "100%", marginTop: 20 }}
-                >
+                <Flex justifyContent="center" style={{ width: "100%" }}>
                   <Button disabled={formSubmitted} type="submit">
                     Envoyer
                   </Button>
@@ -254,7 +252,7 @@ const Contact: FC = () => {
                 <Legal>
                   Vos informations sont utilisées uniquement afin que nous
                   puissions vous recontacter. Elle ne sont pas conservées.
-                </Legal>{" "}
+                </Legal>
               </>
             )}
           </Flex>
