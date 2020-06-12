@@ -15,8 +15,8 @@ import { MobileWave } from "../styles/MobileWave"
 import { Flex } from "../styles/Flex"
 import { Button } from "../components/Button"
 
-import LogoSvg from "../assets/svg/logo.svg"
-import PhoneSvg from "../assets/svg/phone.svg"
+import { ReactComponent as PhoneSvg } from "../assets/svg/phone.svg"
+import { ReactComponent as LogoSvg } from "../assets/svg/logo.svg"
 import { isDeviceMin, isDeviceMax } from "../services/responsive"
 
 const GlobalStyles = createGlobalStyle`

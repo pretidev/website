@@ -8,7 +8,7 @@ import { Seo } from "../components/Seo"
 import { Container } from "../styles/Container"
 import { Flex } from "../styles/Flex"
 
-import Logo from "../assets/svg/logo.svg"
+import { ReactComponent as Logo } from "../assets/svg/logo.svg"
 
 const GlobalStyles = createGlobalStyle`
   body {

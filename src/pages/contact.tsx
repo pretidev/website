@@ -11,8 +11,8 @@ import { Container } from "../styles/Container"
 import { Button } from "../components/Button"
 import { Flex } from "../styles/Flex"
 
-import ThanksSvg from "../assets/svg/thanks.svg"
-import LogoSvg from "../assets/svg/logo.svg"
+import { ReactComponent as ThanksSvg } from "../assets/svg/thanks.svg"
+import { ReactComponent as LogoSvg } from "../assets/svg/logo.svg"
 import validator from "validator"
 
 interface FormFieldsProps {
